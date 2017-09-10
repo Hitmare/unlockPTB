@@ -1,0 +1,28 @@
+{
+    "name": "hitmare/unlock-ptb",
+    "type": "library",
+    "description": "PHP Telegram Bot Lock and Unlock ",
+    "keywords": ["telegram", "bot", "unlock"],
+    "license": "MIT",
+    "homepage": "https://github.com/Hitmare/unlock-PTB",
+    "support": {
+        "issues": "https://github.com/Hitmare/unlock-PTB/issues",
+        "source": "https://github.com/Hitmare/unlock-PTB"
+    },
+    "authors": [
+        {
+            "name": "Hitmare",
+            "email": "hitmare@dragonnet.at",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^5.5|^7.0",
+        "longman/telegram-bot": "^0.48",
+    },
+    "autoload": {
+        "psr-4": {
+            "Hitmare\\unlock-ptb\\": "src"
+        }
+    }
+}
