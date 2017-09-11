@@ -18,11 +18,11 @@
     ],
     "require": {
         "php": "^5.5|^7.0",
-        "longman/telegram-bot": "^0.48",
+        "longman/telegram-bot": "^0.48"
     },
     "autoload": {
         "psr-4": {
-            "hitmare\\unlock-ptb\\": "src",
+            "hitmare\\unlock-ptb\\": "src"
         }
     }
 }
