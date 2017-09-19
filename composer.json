@@ -1,5 +1,5 @@
 {
-    "name": "hitmare/unlock-ptb",
+    "name": "hitmare/unlockptb",
     "type": "library",
     "description": "PHP Telegram Bot Lock and Unlock ",
     "keywords": ["telegram", "bot", "unlock"],
@@ -19,7 +19,7 @@
     ],
     "require": {
         "php": "^5.5|^7.0",
-        "longman/telegram-bot": "^0.48"
+        "longman/telegram-bot": "^0.49"
     },
     "autoload": {
         "psr-4": {
