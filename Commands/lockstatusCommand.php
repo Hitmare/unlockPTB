@@ -10,7 +10,7 @@
 
 namespace Longman\TelegramBot\Commands\AdminCommands;
 namespace Hitmare\UnlockPTB;
-use Hitmare\UnlockPTB\Unlock;
+//use Hitmare\UnlockPTB\Unlock;
 use Longman\TelegramBot\Commands\Command;
 use Longman\TelegramBot\Commands\AdminCommand;
 use Longman\TelegramBot\Request;
