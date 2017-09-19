@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "hitmare\\unlock-ptb\\": "src/"
+            "Hitmare\\unlock-PTB\\": "src/"
         }
     }
 }
