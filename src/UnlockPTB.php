@@ -34,7 +34,7 @@ class Unlock {
                 return FALSE;
             }
             elseif($row){
-                return TRUE:
+                return TRUE;
             }
         }
          catch (PDOException $e) {
