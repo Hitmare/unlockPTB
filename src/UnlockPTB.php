@@ -1,5 +1,5 @@
 <?php
-namespace Hitmare\UnlockPTB;
+namespace Hitmare\Unlock-PTB;
 use Longman\TelegramBot\DB;
 use Longman\TelegramBot\Exception\TelegramException;
 use PDO;
