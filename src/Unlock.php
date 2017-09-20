@@ -108,11 +108,10 @@ class Unlock
                 return 'Wrong Key';
             }
 
-            $sql = 'UPDATE `chat_unlock` SET `status` = :status WHERE `chat` = :chat AND `key` = :key';
+            $sql = 'UPDATE `chat_unlock` SET `status` = :status WHERE `chat` = :chat';
             $sth = $pdo->prepare($sql);
             $sth->bindValue(':chat', $chat_id);
             $sth->bindValue(':status', 1, PDO::PARAM_INT);
-            $sth->bindValue(':key', $key);
             $sth->execute();
 
             return self::isUnlocked($chat_id);
