@@ -91,8 +91,8 @@ class Unlock {
      * @return bool|string
      */
     public static function unlockChannel($chat_id4, $key) {
-        if(!self::rowExist($chat_id3)){
-            if(!self::createRow($chat_id3)) {
+        if(!self::rowExist($chat_id4)){
+            if(!self::createRow($chat_id4)) {
                 return FALSE;
             }
         }          
