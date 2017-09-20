@@ -107,7 +107,7 @@ class Unlock {
             $sth->execute();
             $row = $sth->fetch();
 
-            if ($row['key']; === $key) {
+            if ($row['key'] === $key) {
             $sql = 'UPDATE `chat_unlock` SET `status` = :status WHERE `chat` = :chat AND `key` = :key'; 
             $sth = $pdo->prepare($sql);
             $sth->bindParam(':chat', $chat_id4, PDO::PARAM_INT);
@@ -178,7 +178,12 @@ class Unlock {
             $sth2->execute();
             $row2 = $sth2->fetch();
             // send key if the key is stored properly. Else send Error message 
-            ($row2['key']; === $authkey)?return $authkey:return 'Error creating the Auth Key.';       
+            if ($row2['key'] === $authkey) {
+                return $authkey;
+			}
+			else{
+				return 'Error creating the Auth Key.';
+			}       
         }
          catch (PDOException $e) {
             throw new TelegramException($e->getMessage());
