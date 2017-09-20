@@ -15,7 +15,7 @@ use Longman\TelegramBot\Request;
 /**
  * User "/help" command
  */
-class lockstatusCommand extends UserCommand
+class unlockCommand extends UserCommand
 {
     /**
      * @var string
