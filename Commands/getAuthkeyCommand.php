@@ -43,13 +43,13 @@ class getAuthkeyCommand extends AdminCommand
     {
         $message = $this->getMessage();
         $chat_id = $message->getChat()->getId();
-        $key = trim($message->getText(true));
+        $extchat = trim($message->getText(true));
 		$isUnlocked = Unlock::isUnlocked($chat_id);
 
 
 
 
-        $key = Unlock::getAuthkey($chat_id);
+        $key = Unlock::getAuthkey($extchat);
 		    $text = 'The Authkey for the Channel ' . $chat_id . ': ' . $key;
 
 

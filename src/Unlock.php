@@ -112,6 +112,7 @@ class Unlock {
             $sth = $pdo->prepare($sql);
             $sth->bindParam(':chat', $chat_id4, PDO::PARAM_INT);
             $sth->bindParam(':status', $val, PDO::PARAM_INT);
+            $sth->bindParam(':key', $key, PDO::PARAM_INT);
             $sth->execute();
 
             return self::isUnlocked($chat_id4);
@@ -167,7 +168,7 @@ class Unlock {
             $sql = 'UPDATE `chat_unlock` SET `key` = :key WHERE `chat` = :chat';
             $sth = $pdo->prepare($sql);
             $sth->bindParam(':chat', $chat_id6, PDO::PARAM_INT);
-            $sth->bindParam(':authkey', $authkey, PDO::PARAM_STR);
+            $sth->bindParam(':key', $authkey, PDO::PARAM_STR);
             $sth->execute();
 
             // check if key is stored properly
