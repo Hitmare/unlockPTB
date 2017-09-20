@@ -1,4 +1,5 @@
 <?php
+
 namespace Hitmare\UnlockPTB;
 
 use Longman\TelegramBot\DB;
@@ -20,10 +21,9 @@ class Unlock
     {
         try {
             $pdo = DB::getPdo();
-            $sql = 'INSERT INTO `chat_unlock` (status, chat) VALUES (:status, :chat)';
+            $sql = 'INSERT INTO `chat_unlock` (chat) VALUES (:chat)';
             $sth = $pdo->prepare($sql);
             $sth->bindValue(':chat', $chat_id);
-            $sth->bindValue(':status', 0, PDO::PARAM_INT);
 
             return $sth->execute();
         } catch (PDOException $e) {
