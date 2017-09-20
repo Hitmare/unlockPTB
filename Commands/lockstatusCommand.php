@@ -8,17 +8,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Longman\TelegramBot\Commands\AdminCommands;
+namespace Longman\TelegramBot\Commands\UserCommands;
 
 use Hitmare\UnlockPTB\Unlock;
 use Longman\TelegramBot\Commands\Command;
-use Longman\TelegramBot\Commands\AdminCommand;
+use Longman\TelegramBot\Commands\UserCommand;
 use Longman\TelegramBot\Request;
 
 /**
  * User "/help" command
  */
-class lockstatusCommand extends AdminCommand
+class lockstatusCommand extends UserCommand
 {
     /**
      * @var string
@@ -28,7 +28,7 @@ class lockstatusCommand extends AdminCommand
     /**
      * @var string
      */
-    protected $description = 'Bot im Chat entsperren';
+    protected $description = 'Check if the Bot is locked or unlocked in this Channel';
 
     /**
      * @var string
@@ -38,7 +38,7 @@ class lockstatusCommand extends AdminCommand
     /**
      * @var string
      */
-    protected $version = '1.1.0';
+    protected $version = '1.0.0';
 
     /**
      * Command execute method
@@ -52,10 +52,10 @@ class lockstatusCommand extends AdminCommand
         $chat_id = $message->getChat()->getId();
 		$unlock = Unlock::isUnlocked($chat_id);
         
-       
+       ($unlock)?$text='The Bot is Unlocked here':$text='The Bot is Locked here';
             $data = [
                 'chat_id' => $chat_id,
-                'text'    => $unlock,
+                'text'    => $text,
             ];
 
         return Request::sendMessage($data);
