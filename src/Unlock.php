@@ -11,7 +11,7 @@ class Unlock {
      * @return bool
      * @throws TelegramException
      */
-    private function createRow($chat_id1) {
+    private static function createRow($chat_id1) {
         try {
             $val = 0;
             $pdo = DB::getPdo();
@@ -35,7 +35,7 @@ class Unlock {
      * @return bool
      * @throws TelegramException
      */
-    private function rowExist($chat_id2) {
+    private static function rowExist($chat_id2) {
         try {
             $val = '';
             $pdo = DB::getPdo();
@@ -95,7 +95,7 @@ class Unlock {
         try {
             $val = 1;
             $pdo = DB::getPdo();
-            if(!self::rowExist($chat_id4){
+            if(!self::rowExist($chat_id4)){
                 $sql = 'INSERT INTO `chat_unlock` (status, chat) VALUES (:status, :chat)';
             }
             else {
