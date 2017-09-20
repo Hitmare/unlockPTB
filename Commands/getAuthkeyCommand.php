@@ -50,7 +50,7 @@ class getAuthkeyCommand extends AdminCommand
         $isUnlocked = Unlock::isUnlocked($chat_id);
 
 
-        $key  = Unlock::getAuthkey($extchat);
+        $key  = Unlock::getAuthKey($extchat);
         $text = 'The Authkey for the Channel ' . $chat_id . ': ' . $key;
 
 
