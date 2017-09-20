@@ -48,12 +48,12 @@ class unlockCommand extends UserCommand
       if ($key == '') {
         $data = [
                 'chat_id' => $chat_id,
-                'text'    => 'Please enter the given Key after the command `/unlock <key
+                'text'    => 'Please enter the given Key after the command `/unlock <key>`'
 		'parse_mode' => 'Markdown',
             ];
         return Request::sendMessage($data);
       }
-      
+
       if ($isUnlocked) {
           $text='The Bot is allready Unlocked here';
       }
@@ -65,15 +65,15 @@ class unlockCommand extends UserCommand
 		elseif(is_string($unlock)) {
 			$text = $unlock;
         }
-      
+
        }
             $data = [
                 'chat_id' => $chat_id,
                 'text'    => $text,
             ];
         return Request::sendMessage($data);
-        
-		
-        
+
+
+
     }
 }
