@@ -73,11 +73,11 @@ class Unlock {
             $pdo = DB::getPdo();
             $sql = 'SELECT `status` FROM `chat_unlock` WHERE `chat` = :chat';
             $sth = $pdo->prepare($sql);
-            $sth->bindParam(':chat', $chat_id, PDO::PARAM_INT);
+            $sth->bindParam(':chat', $chat_id3, PDO::PARAM_INT);
             $sth->execute();
             $row = $sth->fetch();
 
-            return $row['status'];
+            return boolval($row['status']);
             
         }
          catch (PDOException $e) {
@@ -103,11 +103,11 @@ class Unlock {
             
             $sql = 'SELECT `key` FROM `chat_unlock` WHERE `chat` = :chat';
             $sth = $pdo->prepare($sql);
-            $sth->bindParam(':chat', $chat_id, PDO::PARAM_INT);
+            $sth->bindParam(':chat', $chat_id4, PDO::PARAM_INT);
             $sth->execute();
             $row = $sth->fetch();
 
-            if ($row['key'] === $key) {
+            if ($row['key'] == $key) {
             $sql = 'UPDATE `chat_unlock` SET `status` = :status WHERE `chat` = :chat AND `key` = :key'; 
             $sth = $pdo->prepare($sql);
             $sth->bindParam(':chat', $chat_id4, PDO::PARAM_INT);
@@ -117,7 +117,7 @@ class Unlock {
             return self::isUnlocked($chat_id4);
             }
             else {
-                return FALSE;
+                return 'Wrong Key';
             }
             
         }
@@ -166,7 +166,7 @@ class Unlock {
             $pdo = DB::getPdo();
             $sql = 'UPDATE `chat_unlock` SET `key` = :key WHERE `chat` = :chat';
             $sth = $pdo->prepare($sql);
-            $sth->bindParam(':chat', $chat_id5, PDO::PARAM_INT);
+            $sth->bindParam(':chat', $chat_id6, PDO::PARAM_INT);
             $sth->bindParam(':authkey', $authkey, PDO::PARAM_STR);
             $sth->execute();
             
@@ -174,7 +174,7 @@ class Unlock {
             
             $sql2 = 'SELECT `key` FROM `chat_unlock` WHERE `chat` = :chat';
             $sth2 = $pdo->prepare($sql2);
-            $sth2->bindParam(':chat', $chat_id, PDO::PARAM_INT);
+            $sth2->bindParam(':chat', $chat_id6, PDO::PARAM_INT);
             $sth2->execute();
             $row2 = $sth2->fetch();
             // send key if the key is stored properly. Else send Error message 
