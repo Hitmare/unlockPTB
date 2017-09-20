@@ -20,10 +20,10 @@ class Unlock {
             $sth->bindParam(':chat', $chat_id1, PDO::PARAM_INT);
             $sth->bindParam(':status', $val, PDO::PARAM_INT);
             $sth->execute();
-            
+
             return self::rowExist($chat_id1);
-            
-            
+
+
         }
          catch (PDOException $e) {
             throw new TelegramException($e->getMessage());
@@ -55,7 +55,7 @@ class Unlock {
         catch (PDOException $e) {
             throw new TelegramException($e->getMessage());
         }
-        
+
     }
 
     /**
@@ -69,7 +69,7 @@ class Unlock {
             }
         }
         try {
-            
+
             $pdo = DB::getPdo();
             $sql = 'SELECT `status` FROM `chat_unlock` WHERE `chat` = :chat';
             $sth = $pdo->prepare($sql);
@@ -78,7 +78,7 @@ class Unlock {
             $row = $sth->fetch();
 
             return boolval($row['status']);
-            
+
         }
          catch (PDOException $e) {
             throw new TelegramException($e->getMessage());
@@ -95,12 +95,12 @@ class Unlock {
             if(!self::createRow($chat_id4)) {
                 return FALSE;
             }
-        }          
+        }
 
         try {
             $val = 1;
             $pdo = DB::getPdo();
-            
+
             $sql = 'SELECT `key` FROM `chat_unlock` WHERE `chat` = :chat';
             $sth = $pdo->prepare($sql);
             $sth->bindParam(':chat', $chat_id4, PDO::PARAM_INT);
@@ -108,18 +108,18 @@ class Unlock {
             $row = $sth->fetch();
 
             if ($row['key'] == $key) {
-            $sql = 'UPDATE `chat_unlock` SET `status` = :status WHERE `chat` = :chat AND `key` = :key'; 
+            $sql = 'UPDATE `chat_unlock` SET `status` = :status WHERE `chat` = :chat AND `key` = :key';
             $sth = $pdo->prepare($sql);
             $sth->bindParam(':chat', $chat_id4, PDO::PARAM_INT);
             $sth->bindParam(':status', $val, PDO::PARAM_INT);
             $sth->execute();
-            
+
             return self::isUnlocked($chat_id4);
             }
             else {
                 return 'Wrong Key';
             }
-            
+
         }
          catch (PDOException $e) {
             throw new TelegramException($e->getMessage());
@@ -131,7 +131,7 @@ class Unlock {
      * @return bool|string
      */
     public static function lockChannel($chat_id5) {
-        
+
         try {
             $val = 0;
             $pdo = DB::getPdo();
@@ -140,15 +140,15 @@ class Unlock {
             $sth->bindParam(':chat', $chat_id5, PDO::PARAM_INT);
             $sth->bindParam(':status', $val, PDO::PARAM_INT);
             $sth->execute();
-            
+
             return self::isUnlocked($chat_id5);
-            
-            
+
+
         }
          catch (PDOException $e) {
             throw new TelegramException($e->getMessage());
         }
-    }   
+    }
     /**
      * @param $chat_id6
      * @return string
@@ -169,26 +169,26 @@ class Unlock {
             $sth->bindParam(':chat', $chat_id6, PDO::PARAM_INT);
             $sth->bindParam(':authkey', $authkey, PDO::PARAM_STR);
             $sth->execute();
-            
+
             // check if key is stored properly
-            
+
             $sql2 = 'SELECT `key` FROM `chat_unlock` WHERE `chat` = :chat';
             $sth2 = $pdo->prepare($sql2);
             $sth2->bindParam(':chat', $chat_id6, PDO::PARAM_INT);
             $sth2->execute();
             $row2 = $sth2->fetch();
-            // send key if the key is stored properly. Else send Error message 
+            // send key if the key is stored properly. Else send Error message
             if ($row2['key'] === $authkey) {
                 return $authkey;
 			}
 			else{
 				return 'Error creating the Auth Key.';
-			}       
+			}
         }
          catch (PDOException $e) {
             throw new TelegramException($e->getMessage());
         }
-    }   
+    }
 }
 
 ?>
