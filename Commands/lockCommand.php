@@ -41,23 +41,24 @@ class lockCommand extends UserCommand
      */
     public function execute()
     {
+
         $message = $this->getMessage();
         $chat_id = $message->getChat()->getId();
         $key = trim($message->getText(true));
-		$isUnlocked = Unlock::isUnlocked($chat_id);
+		    $isUnlocked = Unlock::isUnlocked($chat_id);
 
 
       if (!$isUnlocked) {
           $text='The Bot is allready Locked here';
       }
       else{
-        $unlock = Unlock::lockChannel($chat_id);
-		if (is_bool($unlock)) {
-			(!$unlock)?$text = 'Bot succsessfully locked':$text = 'Could not lock the Bot';
-		}
-		elseif(is_string($unlock)) {
-			$text = $unlock;
-        }
+          $unlock = Unlock::lockChannel($chat_id);
+          if (is_bool($unlock)) {
+              (!$unlock)?$text = 'Bot succsessfully locked':$text = 'Could not lock the Bot';
+		      }
+		      elseif(is_string($unlock)) {
+			        $text = $unlock;
+          }
 
        }
             $data = [
