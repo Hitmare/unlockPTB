@@ -56,13 +56,17 @@ class unlockCommand extends UserCommand
       
       if ($isUnlocked) {
           $text='The Bot is allready Unlocked here';
-        }
-        else{
-         $unlock = Unlock::unlockChannel($chat_id, $key);
-         ($unlock)?$text = 'Bot succsessfully unlocked':$text = 'Could not unlock the Bot';
+      }
+      else{
+        $unlock = Unlock::unlockChannel($chat_id, $key);
+		if (is_bool($unlock)) {
+			($unlock)?$text = 'Bot succsessfully unlocked':$text = 'Could not unlock the Bot';
+		}
+		elseif(is_string($unlock)) {
+			$text = $unlock;
         }
       
-       
+       }
             $data = [
                 'chat_id' => $chat_id,
                 'text'    => $text,
