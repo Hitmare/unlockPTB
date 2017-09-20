@@ -48,7 +48,7 @@ class unlockCommand extends UserCommand
       if ($key == '') {
         $data = [
                 'chat_id' => $chat_id,
-                'text'    => 'Please enter the given Key after the command `/unlock <key>`'
+                'text'    => 'Please enter the given Key after the command `/unlock <key>`';
 		'parse_mode' => 'Markdown',
             ];
         return Request::sendMessage($data);
