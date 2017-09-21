@@ -4,12 +4,11 @@
     "description": "PHP Telegram Bot Lock and Unlock ",
     "keywords": ["telegram", "bot", "unlock"],
     "license": "MIT",
-    "homepage": "https://github.com/Hitmare/unlock-PTB",
+    "homepage": "https://github.com/Hitmare/unlockPTB",
     "support": {
-        "issues": "https://github.com/Hitmare/unlock-PTB/issues",
-        "source": "https://github.com/Hitmare/unlock-PTB"
+        "issues": "https://github.com/Hitmare/unlockPTB/issues",
+        "source": "https://github.com/Hitmare/unlockPTB"
     },
-   
     "authors": [
         {
             "name": "Hitmare",

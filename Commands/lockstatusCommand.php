@@ -11,7 +11,6 @@
 namespace Longman\TelegramBot\Commands\UserCommands;
 
 use Hitmare\UnlockPTB\Unlock;
-use Longman\TelegramBot\Commands\Command;
 use Longman\TelegramBot\Commands\UserCommand;
 use Longman\TelegramBot\Request;
 
@@ -50,17 +49,14 @@ class lockstatusCommand extends UserCommand
     {
         $message = $this->getMessage();
         $chat_id = $message->getChat()->getId();
-		$unlock = Unlock::isUnlocked($chat_id);
-        
-       ($unlock)?$text='The Bot is Unlocked here':$text='The Bot is Locked here';
-            $data = [
-                'chat_id' => $chat_id,
-                'text'    => $text,
-            ];
+        $unlock  = Unlock::isUnlocked($chat_id);
+
+        ($unlock) ? $text = 'The Bot is Unlocked here' : $text = 'The Bot is Locked here';
+        $data = [
+            'chat_id' => $chat_id,
+            'text'    => $text,
+        ];
 
         return Request::sendMessage($data);
-        
-		
-        
     }
 }
