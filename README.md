@@ -5,6 +5,8 @@
 - [Instructions](#instructions)
     - [Installation](#installation)
     - [Add the Lockstatus Check to your Files](#add-the-lockstatus-check-to-your-files)
+    - [How to use](#how-to-use)
+    - [Aviable Commands](#aviable-commands)
 
 ## Introduction
 
@@ -72,3 +74,26 @@ At the Moment it is, as far as i know, the only way to implement this without ed
     }
     // Your Code down here
 ```
+
+### How to use
+
+1. Generate the Authkey
+
+To generate the Authkey there are two ways:
+1. Get the wanted Chat od User ID through the `/chats *` Command and execute `/getAutchkey <id>` directly to the Bot
+2. (Only for Group Chats) Execute `/getAutchkey` inside of the Group Chat and the Bot will send the Botadmin who send the Command the Authkey
+
+2. Unlock the Bot
+For Private Chat:
+- Execute `/unlock <Authkey>` and the Bot will be unlocked.
+For Group Chats:
+- Execute `/unlock <Authkey>` as an **Bot Admin** or as an **Channel Owner** and the Bot will be unlocked.
+
+
+### Aviable Commands
+
+This Library includes four (4) Commands
+- `/getAuthkey` - Generates the Unlock Authkey. Can only be used from Bot Admin
+- `/unlock` - Unlocks the Bot. In Group Chats only Bot Admin and Group Chat Owner can use it
+- `/lock` - Locks the Bot. In Group Chats only Bot Admin and Group Chat Owner can use it
+- `/lockstatus` - Shows the Lockstatus of the Bot. In Group Chats only Bot Admin and Group Chat Owner can use it
