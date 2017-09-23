@@ -40,6 +40,9 @@ run this command in your command line:
 composer require hitmare/unlockptb
 ```
 
+Then you have to import the `chat_unlock.sql` file into your existend Telegram Database 
+
+
 ### Add the Lockstatus Check to your Files
 
 To use the Libary you have to add the Code for checking the Lockstatus in every Command File where you want to include the Lock function.
