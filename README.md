@@ -78,6 +78,12 @@ At the Moment it is, as far as i know, the only way to implement this without ed
     // Your Code down here
 ```
 
+To define in wich Type of Chat the Lock should applys, just add or delete the Chat type in the `hoop.php`
+```php
+    $unlockptb['lockChat'] = ['private','groups','supergroup'];
+```
+The Lock applys to every Chat that matches the type of the Array above. 
+
 ### How to use
 
 1. Generate the Authkey
