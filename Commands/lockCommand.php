@@ -50,6 +50,7 @@ class lockCommand extends UserCommand
         $user_id    = $message->getFrom()->getId();
         $chat_admin = Request::getChatAdministrators(['chat_id' => $chat_id,])->getResult();
         $data['chat_id'] = $chat_id;
+        (!in_array($message->getChat()->getTye(),$this->getConfig('lockChat')))?return Request::emptyResponse():'';
         //Check if Chat is private or not
         if (!$message->getChat()->getTye() === 'privat'){
           // Check if user is admin

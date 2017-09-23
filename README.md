@@ -40,8 +40,15 @@ run this command in your command line:
 composer require hitmare/unlockptb
 ```
 
-Then you have to import the `chat_unlock.sql` file into your existend Telegram Database 
+- Then you have to import the `chat_unlock.sql` file into your existend Telegram Database
 
+- Add the following into the `hook.php` where `$telegram->setCommandConfig` is located
+```php
+     $unlockptb['lockChat'] = ['private','groups','supergroup'];
+    $telegram->setCommandConfig('lockstatus', $unlockptb);
+    $telegram->setCommandConfig('lock', $unlockptb);
+    $telegram->setCommandConfig('unlock', $unlockptb);
+```
 
 ### Add the Lockstatus Check to your Files
 
@@ -58,23 +65,16 @@ At the Moment it is, as far as i know, the only way to implement this without ed
     $message    = $this->getMessage();
     $chat_id    = $message->getChat()->getId();
     $isUnlocked = Unlock::isUnlocked($chat_id);
-    if (!isUnlocked) {
-      $data = ['chat_id' = $chat_id, 'text' = 'This Command is locked inside this Chat'];
-      return Request::sendMessage($data);
-    }
-    // Your Code down here
-```
 
-- To lock only eg. Group Chats but no Privat Chats you can use the Code like this
 
-```php
-    $message    = $this->getMessage();
-    $chat_id    = $message->getChat()->getId();
-    $isUnlocked = Unlock::isUnlocked($chat_id);
-    if (!$message->getChat()->getTye() === 'privat' && !isUnlocked) {
-      $data = ['chat_id' = $chat_id, 'text' = 'This Command is locked inside this Chat'];
-      return Request::sendMessage($data);
+    //Check if the Command is locked
+    if (in_array($message->getChat()->getTye(),$this->getConfig('lockChat'))) {
+      if (!isUnlocked) {
+        $data = ['chat_id' = $chat_id, 'text' = 'This Command is locked inside this Chat'];
+        return Request::sendMessage($data);
+      }
     }
+
     // Your Code down here
 ```
 
