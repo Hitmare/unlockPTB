@@ -47,10 +47,19 @@ class lockCommand extends UserCommand
 
         $message    = $this->getMessage();
         $chat_id    = $message->getChat()->getId();
-        $key        = trim($message->getText(true));
+        $user_id    = $message->getFrom()->getId();
+        $chat_admin = Request::getChatAdministrators(['chat_id' => $chat_id,])->getResult();
+        $data['chat_id'] = $chat_id;
+        //Check if Chat is private or not
+        if (!$message->getChat()->getTye() === 'privat'){
+          // Check if user is admin
+          if (!in_array($user_id,$chat_admin) OR !$this->telegram->isAdmin($user_id)){
+            $data['text'] = 'Sorry, only the Bot Admin and the Chat Owner can execute this Command';
+            return Request::sendMessage($data);
+          }
+        }
+
         $isUnlocked = Unlock::isUnlocked($chat_id);
-
-
         if (!$isUnlocked) {
             $text = 'The Bot is allready Locked here';
         } else {
@@ -62,10 +71,7 @@ class lockCommand extends UserCommand
             }
         }
 
-        $data = [
-            'chat_id' => $chat_id,
-            'text'    => $text,
-        ];
+        $data['text'] = $text;
         return Request::sendMessage($data);
     }
 }

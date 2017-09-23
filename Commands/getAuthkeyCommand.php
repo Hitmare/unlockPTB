@@ -37,6 +37,12 @@ class getAuthkeyCommand extends AdminCommand
     protected $version = '1.0.0';
 
     /**
+     * @var bool
+     */
+
+    protected $private_only = false;
+
+    /**
      * Command execute method
      *
      * @return \Longman\TelegramBot\Entities\ServerResponse
@@ -46,18 +52,24 @@ class getAuthkeyCommand extends AdminCommand
     {
         $message    = $this->getMessage();
         $chat_id    = $message->getChat()->getId();
+        $user_id    = $message->getFrom()->getId();
         $extchat    = trim($message->getText(true));
         $isUnlocked = Unlock::isUnlocked($chat_id);
 
+        $data['chat_id'] = $user_id;
+
+        if (!$message->getChat()->getTye() === 'privat' && $extchat == ''){
+          $extchat = $chat_id;
+        }
+        elseif ($extchat == ''){
+          $text = 'Please use the Command with a Chat ID in the private Chat or use the Command in the Group where you want to generate the Authkey for the Chat';
+        }
 
         $key  = Unlock::getAuthKey($extchat);
         $text = 'The Authkey for the Channel ' . $chat_id . ': ' . $key;
 
+        $data['text'] = $text;
 
-        $data = [
-            'chat_id' => $chat_id,
-            'text'    => $text,
-        ];
         return Request::sendMessage($data);
     }
 }
