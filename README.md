@@ -7,7 +7,7 @@
     - [Add the Lockstatus Check to your Files](#add-the-lockstatus-check-to-your-files)
     - [How to use](#how-to-use)
     - [Aviable Commands](#aviable-commands)
-        -[Installation of the Commands](#installation-of-the-commands)
+        - [Installation of the Commands](#installation-of-the-commands)
 
 
 ## Introduction
