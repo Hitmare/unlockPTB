@@ -50,29 +50,34 @@ class lockstatusCommand extends UserCommand
         $message = $this->getMessage();
         $chat_id = $message->getChat()->getId();
         $user_id    = $message->getFrom()->getId();
-        $chat_admin = Request::getChatAdministrators(['chat_id' => $chat_id,])->getResult();
+        $chat_admins = array();
         $data['chat_id'] = $chat_id;
-
+        $lockChat = $this->getConfig('lockChat');
+        $thisChat = $message->getChat()->getType();
         //Check if the Command should executed in Groups or Private Chats
-        if (!in_array($message->getChat()->getTye(),$this->getConfig('lockChat'))) {
-          return Request::emptyResponse();
+        if (!in_array($thisChat,$lockChat)) {
+          $data['text'] = 'This Command is in this Chat not aviable';
+          return Request::sendMessage($data);
         }
         //Check if Chat is private or not
-        if (!$message->getChat()->getTye() === 'privat'){
-          // Check if user is admin
-          if (!in_array($user_id,$chat_admin) OR !$this->telegram->isAdmin($user_id)){
-            $data['text'] => 'Sorry, only the Bot Admin and the Chat Owner can execute this Command';
-            return Request::sendMessage($data);
+        if ($thisChat != 'private'){
+            // Check if user is admin
+
+            $chat_admin = Request::getChatAdministrators(['chat_id' => $chat_id,])->getResult();
+            foreach ($chat_admin as $chat_member) {
+              $chat_admins[] = $chat_member->getUser()->getId();
+            }
+
+            if (!in_array($user_id,$chat_admins) OR !$this->telegram->isAdmin($user_id)){
+              $data['text'] = 'Sorry, only the Bot Admin and the Chat Owner can execute this Command';
+              return Request::sendMessage($data);
+            }
           }
-        }
 
         $unlock  = Unlock::isUnlocked($chat_id);
 
         ($unlock) ? $text = 'The Bot is Unlocked here' : $text = 'The Bot is Locked here';
-        $data = [
-            'chat_id' => $chat_id,
-            'text'    => $text,
-        ];
+        $data['text'] = $text;
 
         return Request::sendMessage($data);
     }
