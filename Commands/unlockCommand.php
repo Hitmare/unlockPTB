@@ -51,7 +51,9 @@ class unlockCommand extends UserCommand
         $data['chat_id'] = $chat_id;
 
         //Check if the Command should executed in Groups or Private Chats
-        (!in_array($message->getChat()->getTye(),$this->getConfig('lockChat')))?return Request::emptyResponse():'';
+        if (!in_array($message->getChat()->getTye(),$this->getConfig('lockChat'))) {
+          return Request::emptyResponse();
+        }
 
 
         //Check if Chat is private or not
