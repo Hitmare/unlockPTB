@@ -44,7 +44,7 @@ composer require hitmare/unlockptb
 
 - Add the following into the `hook.php` where `$telegram->setCommandConfig` is located
 ```php
-     $unlockptb['lockChat'] = ['private','groups','supergroup'];
+    $unlockptb['lockChat'] = ['private','groups','supergroup'];
     $telegram->setCommandConfig('lockstatus', $unlockptb);
     $telegram->setCommandConfig('lock', $unlockptb);
     $telegram->setCommandConfig('unlock', $unlockptb);
