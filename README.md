@@ -80,7 +80,7 @@ At the Moment it is, as far as i know, the only way to implement this without ed
 1. Generate the Authkey
 
 To generate the Authkey there are two ways:   
-Get the wanted Chat od User ID through the `/chats *` Command and execute `/getAutchkey <id>` directly to the Bot
+Get the wanted Chat or User ID through the `/chats *` Command and execute `/getAutchkey <id>` directly to the Bot
 
 **OR**
 
@@ -90,13 +90,15 @@ Get the wanted Chat od User ID through the `/chats *` Command and execute `/getA
 For Private Chat:
     - Execute `/unlock <Authkey>` and the Bot will be unlocked.
 For Group Chats:
-    - Execute `/unlock <Authkey>` as an **Bot Admin** or as an **Channel Owner** and the Bot will be unlocked.
+    - Execute `/unlock <Authkey>` as an **Bot Admin** or as an **Channel Owner** and the Bot will be unlocked.  
 
+To Lock the Bot execute `/lock`. In Group Chats only the Bot Admin and the Group Chat Owner can use it   
+To Show the Lockstatus execute `/lockstatus`. In Group Chats only the Bot Admin and the Group Chat Owner can use it   
 
 ### Aviable Commands
 
 This Library includes four (4) Commands
 - `/getAuthkey` - Generates the Unlock Authkey. Can only be used from Bot Admin
-- `/unlock` - Unlocks the Bot. In Group Chats only Bot Admin and Group Chat Owner can use it
-- `/lock` - Locks the Bot. In Group Chats only Bot Admin and Group Chat Owner can use it
-- `/lockstatus` - Shows the Lockstatus of the Bot. In Group Chats only Bot Admin and Group Chat Owner can use it
+- `/unlock` - Unlocks the Bot. In Group Chats only the Bot Admin and the Group Chat Owner can use it
+- `/lock` - Locks the Bot. In Group Chats only the Bot Admin and the Group Chat Owner can use it
+- `/lockstatus` - Shows the Lockstatus of the Bot. In Group Chats only the Bot Admin and the Group Chat Owner can use it
