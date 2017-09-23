@@ -7,6 +7,8 @@
     - [Add the Lockstatus Check to your Files](#add-the-lockstatus-check-to-your-files)
     - [How to use](#how-to-use)
     - [Aviable Commands](#aviable-commands)
+        -[Installation of the Commands](#installation-of-the-commands)
+
 
 ## Introduction
 
@@ -82,7 +84,7 @@ At the Moment it is, as far as i know, the only way to implement this without ed
 
 To define in wich Type of Chat the Lock should applys, just add or delete the Chat type in the `hoop.php`
 ```php
-    $unlockptb['lockChat'] = ['private','groups','supergroup'];
+    $unlockptb = array('private','group','supergroup');
 ```
 The Lock applys to every Chat that matches the type of the Array above.
 
@@ -113,3 +115,17 @@ This Library includes four (4) Commands
 - `/unlock` - Unlocks the Bot. In Group Chats only the Bot Admin and the Group Chat Owner can use it
 - `/lock` - Locks the Bot. In Group Chats only the Bot Admin and the Group Chat Owner can use it
 - `/lockstatus` - Shows the Lockstatus of the Bot. In Group Chats only the Bot Admin and the Group Chat Owner can use it
+
+#### Installation of the Commands
+
+
+You can copy all four Commands into your custom Command folder or add the following path to your custom Command array inside of your `hook.php` to stay up to date with your Commandfiles   
+
+    /vendor/hitmare/unlockptb/Commands/
+
+eg:
+
+    $commands_path = [
+    __DIR__ . '/Commands/',
+    __DIR__ . '/vendor/hitmare/unlockptb/Commands/',
+    ];
