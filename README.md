@@ -44,10 +44,10 @@ composer require hitmare/unlockptb
 
 - Add the following into the `hook.php` where `$telegram->setCommandConfig` is located
 ```php
-    $unlockptb['lockChat'] = ['private','groups','supergroup'];
-    $telegram->setCommandConfig('lockstatus', $unlockptb);
-    $telegram->setCommandConfig('lock', $unlockptb);
-    $telegram->setCommandConfig('unlock', $unlockptb);
+    $unlockptb = array('private','group','supergroup');
+    $telegram->setCommandConfig('lockstatus', ['lockChat' => $unlockptb]);
+    $telegram->setCommandConfig('lock', ['lockChat' => $unlockptb]);
+    $telegram->setCommandConfig('unlock', ['lockChat' => $unlockptb]);
 ```
 
 ### Add the Lockstatus Check to your Files
@@ -66,9 +66,11 @@ At the Moment it is, as far as i know, the only way to implement this without ed
     $chat_id    = $message->getChat()->getId();
     $isUnlocked = Unlock::isUnlocked($chat_id);
 
-
-    //Check if the Command is locked
-    if (in_array($message->getChat()->getTye(),$this->getConfig('lockChat'))) {
+    $lockChat = $this->getConfig('lockChat');
+    $thisChat = $message->getChat()->getType();
+    //Check if the lock applys to this Chat Type
+    if (!in_array($thisChat,$lockChat)) {
+      //Check if Command is unlocked
       if (!isUnlocked) {
         $data = ['chat_id' = $chat_id, 'text' = 'This Command is locked inside this Chat'];
         return Request::sendMessage($data);
@@ -82,7 +84,7 @@ To define in wich Type of Chat the Lock should applys, just add or delete the Ch
 ```php
     $unlockptb['lockChat'] = ['private','groups','supergroup'];
 ```
-The Lock applys to every Chat that matches the type of the Array above. 
+The Lock applys to every Chat that matches the type of the Array above.
 
 ### How to use
 
