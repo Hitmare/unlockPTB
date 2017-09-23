@@ -80,8 +80,8 @@ At the Moment it is, as far as i know, the only way to implement this without ed
 1. Generate the Authkey
 
 To generate the Authkey there are two ways:
-    -Get the wanted Chat od User ID through the `/chats *` Command and execute `/getAutchkey <id>` directly to the Bot
-    -(Only for Group Chats) Execute `/getAutchkey` inside of the Group Chat and the Bot will send the Botadmin who send the Command the Authkey
+    - Get the wanted Chat od User ID through the `/chats *` Command and execute `/getAutchkey <id>` directly to the Bot
+    - (Only for Group Chats) Execute `/getAutchkey` inside of the Group Chat and the Bot will send the Botadmin who send the Command the Authkey
 
 2. Unlock the Bot
 For Private Chat:
