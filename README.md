@@ -52,6 +52,14 @@ composer require hitmare/unlockptb
     $telegram->setCommandConfig('unlock', ['lockChat' => $unlockptb]);
 ```
 
+You also have to add for every Command what you want to lock a CommandConfig line in the `hook.php`   
+eg
+
+```php
+    $telegram->setCommandConfig('lockedcommand', ['lockChat' => $unlockptb]);
+```
+
+
 ### Add the Lockstatus Check to your Files
 
 To use the Libary you have to add the Code for checking the Lockstatus in every Command File where you want to include the Lock function.
@@ -71,10 +79,10 @@ At the Moment it is, as far as i know, the only way to implement this without ed
     $lockChat = $this->getConfig('lockChat');
     $thisChat = $message->getChat()->getType();
     //Check if the lock applys to this Chat Type
-    if (!in_array($thisChat,$lockChat)) {
+    if (in_array($thisChat,$lockChat)) {
       //Check if Command is unlocked
-      if (!isUnlocked) {
-        $data = ['chat_id' = $chat_id, 'text' = 'This Command is locked inside this Chat'];
+      if (!$isUnlocked) {
+        $data = ['chat_id' => $chat_id, 'text' => 'This Command is locked inside this Chat'];
         return Request::sendMessage($data);
       }
     }

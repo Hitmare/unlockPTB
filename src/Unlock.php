@@ -98,7 +98,7 @@ class Unlock
 
         try {
             $pdo = DB::getPdo();
-            $sql = 'SELECT `key` FROM `chat_unlock` WHERE `chat` = :chat';
+            $sql = 'SELECT `authkey` FROM `chat_unlock` WHERE `chat` = :chat';
             $sth = $pdo->prepare($sql);
             $sth->bindValue(':chat', $chat_id);
             $sth->execute();
@@ -162,7 +162,7 @@ class Unlock
             //generate and store key
             $key = uniqid();
             $pdo = DB::getPdo();
-            $sql = 'UPDATE `chat_unlock` SET `key` = :key WHERE `chat` = :chat';
+            $sql = 'UPDATE `chat_unlock` SET `authkey` = :key WHERE `chat` = :chat';
             $sth = $pdo->prepare($sql);
             $sth->bindValue(':chat', $chat_id);
             $sth->bindValue(':key', $key);
@@ -170,13 +170,13 @@ class Unlock
 
             // check if key is stored properly
 
-            $sql2 = 'SELECT `key` FROM `chat_unlock` WHERE `chat` = :chat';
+            $sql2 = 'SELECT `authkey` FROM `chat_unlock` WHERE `chat` = :chat';
             $sth2 = $pdo->prepare($sql2);
             $sth2->bindValue(':chat', $chat_id);
             $sth2->execute();
             $key_db = $sth2->fetch();
             // send key if the key is stored properly. Else send Error message
-            if ($key_db === $key) {
+            if ($key_db['authkey'] === $key) {
                 return $key;
             }
 

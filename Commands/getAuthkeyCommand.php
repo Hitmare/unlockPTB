@@ -58,10 +58,10 @@ class getAuthkeyCommand extends AdminCommand
 
         $data['chat_id'] = $user_id;
 
-        if (!$message->getChat()->getTye() === 'privat' && $extchat == ''){
+        if ($message->getChat()->getTye() != 'private' && $extchat == ''){
           $extchat = $chat_id;
         }
-        elseif ($extchat == ''){
+        elseif ($message->getChat()->getTye() === 'private' && $extchat == ''){
           $text = 'Please use the Command with a Chat ID in the private Chat or use the Command in the Group where you want to generate the Authkey for the Chat';
         }
 
